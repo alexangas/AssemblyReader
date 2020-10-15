@@ -19,7 +19,7 @@ namespace AssemblyReaderLib
                 {typeof(AssemblyCopyrightAttribute), t => ((AssemblyCopyrightAttribute) t).Copyright},
                 {typeof(AssemblyDescriptionAttribute), t => ((AssemblyDescriptionAttribute) t).Description},
                 {typeof(AssemblyTitleAttribute), t => ((AssemblyTitleAttribute) t).Title},
-                {typeof(NeutralResourcesLanguageAttribute), t => ((AssemblyTitleAttribute) t).Title}
+                {typeof(NeutralResourcesLanguageAttribute), t => ((NeutralResourcesLanguageAttribute) t).CultureName}
             };
 
         public Assembly LoadAssembly(string filename)
