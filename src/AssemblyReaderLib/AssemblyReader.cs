@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.Versioning;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AssemblyReaderLib
 {
@@ -19,7 +21,8 @@ namespace AssemblyReaderLib
                 {typeof(AssemblyCopyrightAttribute), t => ((AssemblyCopyrightAttribute) t).Copyright},
                 {typeof(AssemblyDescriptionAttribute), t => ((AssemblyDescriptionAttribute) t).Description},
                 {typeof(AssemblyTitleAttribute), t => ((AssemblyTitleAttribute) t).Title},
-                {typeof(NeutralResourcesLanguageAttribute), t => ((NeutralResourcesLanguageAttribute) t).CultureName}
+                {typeof(NeutralResourcesLanguageAttribute), t => ((NeutralResourcesLanguageAttribute) t).CultureName},
+                {typeof(TargetFrameworkAttribute), t => ((TargetFrameworkAttribute) t).FrameworkDisplayName }
             };
 
         public Assembly LoadAssembly(string filename)
@@ -49,6 +52,8 @@ namespace AssemblyReaderLib
                 var attrResult = attrFunc(retrieved);
                 details.Add(attrName, attrResult);
             }
+
+            details.Add(nameof(Assembly.FullName), assembly.FullName);
 
             return details;
         }
